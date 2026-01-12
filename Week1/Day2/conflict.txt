@@ -1,1 +1,1 @@
-This is from Day2 branch
+This change is resolved and merged from Day2 and Day2Conflict
