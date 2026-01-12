@@ -1,5 +1,5 @@
 #include<stdio.h>
 int main()
 {
-    printf("HEllo, This is a sample code devops!!");
+    printf("Hello, This is the sample code for devops-Day1");
 }

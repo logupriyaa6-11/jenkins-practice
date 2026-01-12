@@ -36,7 +36,7 @@ Step 6: Connect VS code to BitBucket
 1. add remote repository and sign in if asked 
 
 Step 7: Push Code to remote repository
-1. Click push 
+1. Click sync/publish 
 2. Now the code is visible in BitBucket
 
 ** Click Source control -> Stage -> Commit -> Push **
