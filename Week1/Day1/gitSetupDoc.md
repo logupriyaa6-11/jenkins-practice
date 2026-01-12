@@ -46,23 +46,23 @@ Open BitBucket and check whether the files are visible or not
 
  
 # Git commands:
-git init - creates a new repo 
-git clone link - clones the repo which already exist
-git add file_name - Add the untracked file
-git add . - add all the untracked files
-git rm file_name - to remove the file
-git reset file_name - Unstage the file 
-git reset - Unstage everything 
-git status - used to check the what to be added
-git commit - saves the changes permanently in the Git history
-git commit -m "message" - saves the changes with customised message 
-git commit -am "message" - saves all the tracked files basically a quick commit 
-git commit --amend - to edit the message
-git switch branch_name (or) git checkout branch_name - switch the branch
-git switch -c branch_name (or) git checkout -b branch_name - creates a new branch
-git branch - list the branches
-git branch -d branch_name - deletes the branch
-git branch -D branch_name - force deletes the branch
+1. git init - creates a new repo 
+2. git clone link - clones the repo which already exist
+3. git add file_name - Add the untracked file
+4. git add . - add all the untracked files
+5. git rm file_name - to remove the file
+6. git reset file_name - Unstage the file 
+7. git reset - Unstage everything 
+8. git status - used to check the what to be added
+9. git commit - saves the changes permanently in the Git history
+10. git commit -m "message" - saves the changes with customised message 
+11. git commit -am "message" - saves all the tracked files basically a quick commit 
+12. git commit --amend - to edit the message
+13. git switch branch_name (or) git checkout branch_name - switch the branch
+14. git switch -c branch_name (or) git checkout -b branch_name - creates a new branch
+15. git branch - list the branches
+16. git branch -d branch_name - deletes the branch
+17. git branch -D branch_name - force deletes the branch
 
 ## CI/CD pipelines:
 
