@@ -2,7 +2,7 @@
  ## git commands
 
  git checkout branch_name (here the branch name is the destination where the merge will be done)
- git merge branch_name (here the branch_anme is the source from where the contents will be added o the destination branch)
+ git merge branch_name (here the branch_name is the source from where the contents will be added o the destination branch)
 
  It brings the code to desination branch
 
@@ -26,7 +26,9 @@
  Now the conflict arises 
  because we have changes from 2 branch on the same file 
 
- Gi will not assume itself and merge them
+ ![Merge conflict] (mergeconflict.png)
+
+ Git will not assume itself and merge them
  It will ask us to resolve we need to resolve it manually by replacing the entire text with a new text or else 
  we need to choose from which branch we need the content to be merged 
 
@@ -34,4 +36,4 @@
  2. git diff - used to see conflict changes 
  3. git merge --abort - cancels the merge
  4. git checkout --theirs files - keeps the merge from other branch 
- 5. git checkout --ours file - keeps the changes from curret branch
+ 5. git checkout --ours file - keeps the changes from current branch
