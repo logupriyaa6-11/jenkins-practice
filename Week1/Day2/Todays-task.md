@@ -319,3 +319,41 @@ Used to preview what will be pushed without actually pushing.
 
 **Command:**
 git push --dry-run
+
+The solution for sync-up question:
+I was asked to create a branch from Day1 branch and name it as Day1-test
+and modify the file and merge it 
+
+PS C:\Users\logupriya.a\devops_logupriyaa> **git add Week1/Day1/sample.c**
+PS C:\Users\logupriya.a\devops_logupriyaa> **git status**                
+On branch Day1-testt
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   Week1/Day1/sample.c
+
+PS C:\Users\logupriya.a\devops_logupriyaa> **git commit -m "test"**
+[Day1-testt 82a1dd7] test
+ 1 file changed, 1 insertion(+)
+PS C:\Users\logupriya.a\devops_logupriyaa> **git push origin Day1-testt**
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 385 bytes | 128.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: 
+remote: Create pull request for Day1-testt:
+remote:   https://bitbucket.org/devops_priya1/devops_logupriyaa/pull-requests/new?source=Day1-testt&t=1
+remote:
+To https://bitbucket.org/devops_priya1/devops_logupriyaa.git
+ * [new branch]      Day1-testt -> Day1-testt
+PS C:\Users\logupriya.a\devops_logupriyaa> **git checkout Day1**         
+Switched to branch 'Day1'
+Your branch is up to date with 'origin/Day1'.
+PS C:\Users\logupriya.a\devops_logupriyaa> **git merge Day1-testt**    
+Updating 959f09f..82a1dd7
+Fast-forward
+ Week1/Day1/sample.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+ worked on it practically
