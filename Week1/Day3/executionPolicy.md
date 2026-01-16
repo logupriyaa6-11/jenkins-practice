@@ -21,3 +21,124 @@ built on .NET so every command returns .NET object
 - repeatable and reliable 
 
 for eg., if same task wants to be done on every system in a company then lets go with powershell as the automate the repeated tasks 
+
+# cmdlet:
+built in powershell command
+- list processes 
+- controlling services
+- managing files
+
+format: verb-noun
+
+### why do we need cmdlet?
+Cmdlets exist to give PowerShell structured, safe, and powerful commands that work with real data and enable automation.
+
+### Execution policy:
+PowerShell execution policies control how and when scripts are allowed to run on Windows systems. Enforcement applies only on Windows.
+
+1. **AllSigned**
+   - All scripts and configuration files must be digitally signed.
+   - Includes scripts written on the local computer.
+   - Prompts before running scripts from unknown publishers.
+   - Protects against unsigned scripts but can still run signed malicious scripts.
+
+2. **Bypass**
+   - No scripts are blocked.
+   - No warnings or prompts.
+   - Designed for embedded PowerShell or applications with their own security model.
+   - Provides no protection against malicious scripts.
+
+3. **Default**
+   - Sets PowerShell to the system default execution policy.
+   - Default is RemoteSigned on Windows clients and servers
+
+4. **RemoteSigned**
+   - Default policy for Windows computers.
+   - Local scripts can run without a signature.
+   - Scripts downloaded from the internet must be signed.
+   - Unsigned downloaded scripts can run if explicitly unblocked.
+   - Reduces risk from internet-based scripts.
+
+5. **Restricted**
+   - Does not allow any scripts to run.
+   - Only individual commands can be executed interactively.
+   - Blocks all script files, modules, formatting files, and PowerShell profiles.
+   - Most secure but highly restrictive.
+
+6. **Undefined**
+   - No execution policy is set in the current scope.
+   - PowerShell checks other scopes for a policy.
+   - If all scopes are Undefined:
+     - Windows client → Restricted
+     - Windows Server → RemoteSigned
+
+7. **Unrestricted**
+   - Default policy for non-Windows systems.
+   - All scripts can run, including unsigned scripts.
+   - Warns before running scripts from outside the local intranet.
+   - Relies on user judgment and system permissions.
+
+### Execution Policy Scope:
+Execution policy scopes define where an execution policy applies. Policies are evaluated in precedence order, and the highest-precedence policy takes effect.
+
+Scopes in precedence order:
+MachinePolicy → UserPolicy → Process → CurrentUser → LocalMachine
+
+1. **MachinePolicy**
+   - Set using Group Policy.
+   - Applies to all users on the computer.
+   - Highest precedence.
+   - Cannot be overridden by other scopes.
+
+2. **UserPolicy**
+   - Set using Group Policy.
+   - Applies only to the current user.
+   - Takes precedence over Process, CurrentUser, and LocalMachine.
+
+3. **Process**
+   - Applies only to the current PowerShell session.
+   - Stored in the x$Env:PSExecutionPolicyPreference environment variable.
+   - Deleted when the session is closed.
+   - Useful for temporary policy changes.
+
+4. **CurrentUser**
+   - Applies only to the current user.
+   - Stored in the CurrentUser configuration file.
+   - Overrides LocalMachine but not Process or Group Policy scopes.
+
+5. **LocalMachine**
+   - Applies to all users on the computer.
+   - Stored in the AllUsers configuration file.
+   - Default scope when setting an execution policy.
+   - Lowest precedence.
+
+## Task
+Write a PowerShell script to set execution policy (as unrestricted) using parameters.
+
+**script**
+param (
+    [string]$Policy
+)
+
+Set-ExecutionPolicy -ExecutionPolicy $Policy -Scope CurrentUser -Force
+
+here, 
+param - parameter that takes the input from user 
+[string] - it is a datatype 
+$Policy - variable name (the $Policy will be in string data structure)
+Set-ExecutionPolicy - built-in powershell command to change script execution rules
+-ExecutionPolicy - it is the paramenter of commandlet
+$Policy -  value passed from script
+
+user input will be given to $Policy variable to the cmdlet Set-ExecutionPolicy
+
+-Scope CurrentUser - limits the scope to only logged-in users
+-Force - to not have the confirmation prompts
+
+**execution**
+.\execution_policy.ps1 -Policy Unrestricted 
+
+param block takes the input
+$Policy stores it 
+Set-ExecutionPolicy applies it 
+Scope limits changes to current user 
