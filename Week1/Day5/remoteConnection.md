@@ -22,7 +22,7 @@ PowerShell state:
 ### Step 2: Adding the Remote System to TrustedHosts
 Command executed:
 ```powershell
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "135.235.169.49" -Force
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "IP_ADDRESS" -Force
 
 Explanation:
 The local system and the remote VM are not part of the same domain
@@ -32,7 +32,7 @@ Verification command:
 Get-Item WSMan:\localhost\Client\TrustedHosts
 
 Confirmed output:
-Value : 135.235.169.49
+Value : IP ADDRESS
 
 PowerShell state:
 Still operating locally
@@ -41,9 +41,9 @@ Remote system is now trusted for WinRM communication
 ### Step 3: Defining Remote Connection Variables
 Commands executed:
 
-$remoteIP = "135.235.169.49"
-$username = "test_user"
-$password = "TestUser@1234"
+$remoteIP = "IP_address"
+$username = "user_name"
+$password = "password"
 
 PowerShell state:
 Local PowerShell session
@@ -87,7 +87,7 @@ Interactive remote session is active
 All commands now run on the remote system
 
 verification:
-[135.235.169.49]: PS C:\Users\test_user\Documents>
+[IP_ADDRESS]: PS C:\Users\test_user\Documents>
 
 ### Step 7: Running Commands on the Remote System
 Commands executed:
