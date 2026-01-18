@@ -28,8 +28,6 @@ Install-Module -name (module_name) -scope CurrentUser
 It will give a prompt:
 do you trust this repository
 
-but when we use -Force with the install command then this prompt will not be shown
-
 command to import the module:
 Import-Module (module_name)
 
@@ -52,3 +50,52 @@ Remove-Module (module_name)
 
 command to uninstall a module:
 Uninstall-Module (module_name) -AllVersion -Force
+
+### Explaination:
+$moduleName = Read-Host "Enter the module name to install"
+$scope = Read-Host "Enter the scope"
+
+function installModule {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$moduleName,
+
+        [Parameter(Mandatory = $true)]
+        [string]$scope
+    )
+    try {
+        Write-Host "Checking if module '$moduleName' is already installed"
+
+        $existingModule = Get-Module -ListAvailable -Name $moduleName
+
+        if (-not $existingModule) {
+            Write-Host "Module not found. Installing '$moduleName'"
+
+            Install-Module -Name $moduleName -Scope $scope
+        }
+        else {
+            Write-Host "Module '$moduleName' is already installed."
+        }
+
+        Write-Host "Importing module '$moduleName'"
+        Import-Module $moduleName 
+
+        Write-Host "Available commands in module '$moduleName'"
+        Get-Command -Module $moduleName
+    }
+    catch {
+        Write-Host "error"
+    }
+}
+
+installModule -ModuleName $moduleName -Scope $scope
+
+1. declaring and reading the input from user
+2. defining function
+   - inside funtion, there is a param block 
+   - the madatory refers to required feild
+   - this takes input from the pipeline
+   - type casting the input as string
+3. To prevent the module reinstalling, we check whether it is already available or not 
+4. then the module is imported and by using get command we could see i=the commands available inside the module 
+5. here the 'Az' module is quite big so we have to specify function of the module
