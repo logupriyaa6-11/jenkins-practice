@@ -274,7 +274,7 @@ git push origin <branch-name>
 ## git push -u origin <branch-name>
 Used to push a branch and set the upstream tracking branch.
 
-**Command:** 
+**Command:**
 git push -u origin <branch-name>
 
 After setting upstream, future `git push` commands can be run without specifying the branch name.
