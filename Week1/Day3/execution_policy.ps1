@@ -1,3 +1,6 @@
+$policy = read-host "Enter the policy"
+$scope = read-host "Enter the scope"
+
 function setExecPolicy {
     param {
         [string]$policy
@@ -16,8 +19,9 @@ function setExecPolicy {
         write-host "$policy is set to current user"
     }
     catch {
-        write-host "Error"
+        write-host "Error: $($_.Exception.Message)"
+
     }
 }
 
-setExecPolicy
+setExecPolicy -Policy $policy -Scope $scope
