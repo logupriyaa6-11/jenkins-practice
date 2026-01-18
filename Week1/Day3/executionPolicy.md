@@ -158,6 +158,18 @@ user input will be given to $Policy variable to the cmdlet Set-ExecutionPolicy
 -Scope CurrentUser - limits the scope to only logged-in users
 
 **execution**
+**before:**
+PS C:\Users\logupriya.a\devops_logupriyaa> get-executionpolicy -list
+
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser    RemoteSigned
+ LocalMachine    RemoteSigned
+
+**after:**
 PS C:\Users\logupriya.a\devops_logupriyaa\Week1\Day3> .\execution_policy.ps1
 Enter the execution policy: : Restricted
 Restricted is set to current user

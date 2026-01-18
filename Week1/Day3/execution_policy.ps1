@@ -2,9 +2,9 @@ $policy = read-host "Enter the policy"
 $scope = read-host "Enter the scope"
 
 function setExecPolicy {
-    param {
+    param (
         [string]$policy
-    }
+    )
     try {
         if (-not $policy) {
             $policy = Read-Host "Enter the execution policy "
