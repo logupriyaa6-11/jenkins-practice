@@ -1,5 +1,23 @@
-param (
-    [string]$Policy
-)
+function setExecPolicy {
+    param {
+        [string]$policy
+    }
+    try {
+        if (-not $policy) {
+            $policy = Read-Host "Enter the execution policy "
+        }
 
-Set-ExecutionPolicy -ExecutionPolicy $Policy -Scope CurrentUser -Force
+        if ([string]::IsNullOrWhiteSpace($policy)) {
+            throw "Invalid input"
+        }
+
+        Set-ExecutionPolicy -ExecutionPolicy $policy -Scope CurrentUser
+
+        write-host "$policy is set to current user"
+    }
+    catch {
+        write-host "Error"
+    }
+}
+
+setExecPolicy

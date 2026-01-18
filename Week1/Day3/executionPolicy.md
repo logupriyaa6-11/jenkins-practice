@@ -89,41 +89,64 @@ MachinePolicy → UserPolicy → Process → CurrentUser → LocalMachine
    - Applies to all users on the computer.
    - Highest precedence.
    - Cannot be overridden by other scopes.
+   eg : An organization enforces AllSigned for all users using Group Policy
 
 2. **UserPolicy**
    - Set using Group Policy.
    - Applies only to the current user.
    - Takes precedence over Process, CurrentUser, and LocalMachine.
+   eg : A developer user is enforced with RemoteSigned through Group Policy.
 
 3. **Process**
    - Applies only to the current PowerShell session.
    - Stored in the x$Env:PSExecutionPolicyPreference environment variable.
    - Deleted when the session is closed.
    - Useful for temporary policy changes.
+   eg : Temporary testing or running a script without changing system policy.
 
 4. **CurrentUser**
    - Applies only to the current user.
    - Stored in the CurrentUser configuration file.
    - Overrides LocalMachine but not Process or Group Policy scopes.
+   eg : when user wants to run scripts without affecting other users.
 
 5. **LocalMachine**
    - Applies to all users on the computer.
    - Stored in the AllUsers configuration file.
    - Default scope when setting an execution policy.
    - Lowest precedence.
+   eg : A shared lab computer is used by multiple users. The administrator wants to prevent all users from running PowerShell scripts to avoid accidental or malicious changes.
 
 ## Task
 Write a PowerShell script to set execution policy (as unrestricted) using parameters.
 
 **script**
-param (
-    [string]$Policy
-)
+function setExecPolicy {
+   param {
+      [string]$policy
+   }
 
-Set-ExecutionPolicy -ExecutionPolicy $Policy -Scope CurrentUser -Force
+   try {
+      if (-not $policy) {
+         $policy = Read-Host "Enter the execution policy "
+      }
+
+      if ([string]::IsNullOrWhiteSpace($policy)) {
+         throw "Invalid input"
+      }
+
+      Set-ExecutionPolicy -ExecutionPolicy $policy -Scope CurrentUser
+
+      write-host "$policy is set to current user"
+   }
+   catch {
+     write-host "Error"
+   }
+}
+setExecPolicy
 
 here, 
-param - parameter that takes the input from user 
+param - variable declared inside this block
 [string] - it is a datatype 
 $Policy - variable name (the $Policy will be in string data structure)
 Set-ExecutionPolicy - built-in powershell command to change script execution rules
@@ -133,12 +156,23 @@ $Policy -  value passed from script
 user input will be given to $Policy variable to the cmdlet Set-ExecutionPolicy
 
 -Scope CurrentUser - limits the scope to only logged-in users
--Force - to not have the confirmation prompts
 
 **execution**
-.\execution_policy.ps1 -Policy Unrestricted 
+PS C:\Users\logupriya.a\devops_logupriyaa\Week1\Day3> .\execution_policy.ps1
+Enter the execution policy: : Restricted
+Restricted is set to current user
 
 param block takes the input
 $Policy stores it 
 Set-ExecutionPolicy applies it 
 Scope limits changes to current user 
+
+ get-executionpolicy -list
+
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+**CurrentUser      Restricted**
+ LocalMachine    RemoteSigned
