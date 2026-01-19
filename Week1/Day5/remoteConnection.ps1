@@ -25,7 +25,6 @@ function Open-RemoteSession {
 
         Write-Host "Collecting credentials" 
         $credential = Get-Credential
-
         Write-Host "Testing WinRM connectivity to $TargetIP" 
         Test-WSMan -ComputerName $TargetIP
 
