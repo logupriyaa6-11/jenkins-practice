@@ -11,107 +11,63 @@ The successful change of the PowerShell prompt and execution of commands confirm
 - Session type: Interactive
 
 ## Step-by-Step Execution and PowerShell State
-### Step 1: Starting Windows PowerShell
-Windows PowerShell is launched with Administrator privileges.
+### Step 1:Check PowerShell Version
+$PSVersionTable.PSVersion
 
-PowerShell state:
-- Running on the local machine
-- No remote session is active
-- Ready to configure WinRM settings
+What it does:
+Checks that PowerShell supports remote connections.
 
-### Step 2: Adding the Remote System to TrustedHosts
-Command executed:
-```powershell
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "IP_ADDRESS" -Force
+### Step 2: Check WinRM Service
+Get-Service WinRM
 
-Explanation:
-The local system and the remote VM are not part of the same domain
-TrustedHosts allows WinRM connections in a workgroup environment
+What it does:
+Checks if the service used for remote connections is running.
 
-Verification command:
+### Step 3: Start WinRM
+Start-Service WinRM
+
+What it does:
+Starts the WinRM service so remote access is possible.
+
+### Step 4: Add Remote System to TrustedHosts
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value 4.247.173.88
+
+What it does:
+Allows PowerShell to trust the remote system since both systems are not in the same domain.
+
+### Step 5: Verify TrustedHosts
 Get-Item WSMan:\localhost\Client\TrustedHosts
 
-Confirmed output:
-Value : IP ADDRESS
+What it does:
+Confirms the remote IP is added correctly.
 
-PowerShell state:
-Still operating locally
-Remote system is now trusted for WinRM communication
+### Step 6: Enter Credentials
+$credential = Get-Credential
 
-### Step 3: Defining Remote Connection Variables
-Commands executed:
+What it does:
+Asks for username and password securely.
 
-$remoteIP = "IP_address"
-$username = "user_name"
-$password = "password"
+### Step 7: Test remote connection
+Test-WSMan 4.247.173.88
 
-PowerShell state:
-Local PowerShell session
-Connection details stored in variables for later use
+What it does:
+Checks if the remote system is reachable using WinRM.
 
-### Step 4: Creating Secure Credentials
-Commands executed:
-$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+### Step 8: Connect to remote system
+Enter-PSSession -ComputerName 4.247.173.88 -Credential $credential
 
-Explanation:
-The password is converted into a secure string
-A credential object is created for safe authentication
+What it does:
+Starts an interactive PowerShell session on the remote machine.
 
-PowerShell state:
-Local session
-Credentials prepared for remote login
-
-### Step 5: Creating the Remote PowerShell Session
-Command executed:
-$session = New-PSSession -ComputerName $remoteIP -Credential $cred
-
-Explanation:
-A remote session is created in the background
-The session is not interactive yet
-
-PowerShell state:
-Local machine
-Remote session exists but is not entered
-
-### Step 6: Entering the Interactive Remote Session
-Command executed:
-Enter-PSSession -Session $session
-
-Explanation:
-PowerShell switches control to the remote virtual machine
-The prompt changes to indicate a remote session
-
-PowerShell state:
-Interactive remote session is active
-All commands now run on the remote system
-
-verification:
-[IP_ADDRESS]: PS C:\Users\test_user\Documents>
-
-### Step 7: Running Commands on the Remote System
-Commands executed:
+### Step 9: Verify Connection
 hostname
 whoami
-Get-Date
 
-Explanation:
-hostname confirms the remote system name
-whoami confirms the authenticated user
-Get-Date shows the remote system time
+What it does:
+Confirms you are connected to the remote machine and user.
 
-PowerShell state:
-Fully interactive
-Commands executed on the remote VM
-
-### Step 8: Exiting the Remote Session
-Command executed:
+### Step 10: Exit Remote Session
 Exit-PSSession
 
-Explanation:
-The interactive remote session is closed
-Control returns to the local system
-
-PowerShell state:
-Back in local PowerShell
-Remote session successfully ended
+What it does:
+Closes the remote connection and returns to the local system.   

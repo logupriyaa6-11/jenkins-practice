@@ -1,14 +1,42 @@
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "135.235.169.49" -Force
+function Open-RemoteSession {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$TargetIP
+    )
 
-Get-Item WSMan:\localhost\Client\TrustedHosts
+    try {
+        Write-Host "Checking PowerShell version" 
+        $PSVersionTable.PSVersion
 
-$remoteIP = "IP address"
-$username = "user_name"
-$password = "password"
-$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+        Write-Host "Verifying WinRM service" 
+        $service = Get-Service -Name WinRM
 
-$session = New-PSSession -ComputerName $remoteIP -Credential $cred
-Enter-PSSession -Session $session
+        if ($service.Status -eq 'Stopped') {
+            Write-Host "Starting WinRM service" 
+            Start-Service -Name WinRM
+        }
 
-Exit-PSSession
+        Write-Host "WinRM service status:" 
+        Get-Service -Name WinRM
+
+        Write-Host "Adding remote system to TrustedHosts" 
+        Set-Item WSMan:\localhost\Client\TrustedHosts -Value $TargetIP
+        Get-Item WSMan:\localhost\Client\TrustedHosts
+
+        Write-Host "Collecting credentials" 
+        $credential = Get-Credential
+
+        Write-Host "Testing WinRM connectivity to $TargetIP" 
+        Test-WSMan -ComputerName $TargetIP
+
+        Write-Host "Opening remote PowerShell session..." 
+        Enter-PSSession -ComputerName $TargetIP -Credential $credential
+    }
+    catch {
+        Write-Host "Remote connection failed" 
+        Write-Host $_.Exception.Message
+    }
+}
+
+$ipAddress = "4.247.173.88"
+Open-RemoteSession -TargetIP $ipAddress
