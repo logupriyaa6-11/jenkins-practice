@@ -3,7 +3,7 @@
 Module is a container which has many scripts
 
 ### why do we need modules?
-Instead of writting the same scripts anf=gain and again, we put them in a module and reuse them whenever needed. W e can use it any where
+Instead of writting the same scripts again and again, we put them in a module and reuse them whenever needed. W e can use it any where
 
 ### What a module can have?
 - cmdlet
