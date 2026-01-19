@@ -1,9 +1,33 @@
-$string = Read-Host "Enter a string"
+function getReversedString {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$InputString
+    )
 
-$reverse = ""
+    try {
+        if ([string]::IsNullOrWhiteSpace($InputString)) {
+            throw "Input string cannot be empty."
+        }
 
-for ($i = $string.Length - 1; $i -ge 0; $i--) {
-    $reverse = $reverse + $string[$i]
+        $reversedString = ""
+
+        for ($characterIndex = $InputString.Length - 1; $characterIndex -ge 0; $characterIndex--) {
+            $reversedString += $InputString[$characterIndex]
+        }
+
+        return $reversedString
+    }
+    catch {
+        Write-Error $_
+    }
 }
 
-Write-Output "Reversed string is: $reverse"
+try {
+    $userInputString = Read-Host "Enter a string"
+
+    $result = getReversedString -InputString $userInputString
+    Write-Output "Reversed string is: $result"
+}
+catch {
+    Write-Error "Unexpected error occurred."
+}

@@ -22,7 +22,6 @@ PS C:\Windows\System32> Copy-Item `
 >>   -Path "C:\Temp\demo.txt" `
 >>   -Destination "C:\Users\Public\Desktop\demo.txt" `
 >>   -ToSession $Session `
->>   -Force
 PS C:\Windows\System32> Invoke-Command -Session $Session -ScriptBlock {
 >>     Test-Path "C:\Users\Public\Desktop\demo.txt"
 >> }

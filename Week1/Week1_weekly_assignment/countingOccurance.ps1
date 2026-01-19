@@ -1,24 +1,41 @@
-$string = Read-Host "Enter a string"
+function GetCharacterFrequency {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$InputString
+    )
 
-for ($i = 0; $i -lt $string.Length; $i++) {
-
-    $count = 0
-
-    for ($j = 0; $j -lt $string.Length; $j++) {
-        if ($string[$i] -eq $string[$j]) {
-            $count++
+    try {
+        if ([string]::IsNullOrWhiteSpace($InputString)) {
+            throw "Input string cannot be empty."
         }
-    }
 
-    $alreadyCounted = $false
-    for ($k = 0; $k -lt $i; $k++) {
-        if ($string[$i] -eq $string[$k]) {
-            $alreadyCounted = $true
-            break
+        $characterFrequency = @{}
+
+        foreach ($character in $InputString.ToCharArray()) {
+            if ($characterFrequency.ContainsKey($character)) {
+                $characterFrequency[$character]++
+            }
+            else {
+                $characterFrequency[$character] = 1
+            }
         }
-    }
 
-    if (-not $alreadyCounted) {
-        Write-Output "$($string[$i]) : $count"
+        return $characterFrequency
     }
+    catch {
+        Write-Error $_
+    }
+}
+
+try {
+    $userInputString = Read-Host "Enter a string"
+
+    $frequencyResult = GetCharacterFrequency -InputString $userInputString
+
+    foreach ($key in $frequencyResult.Keys) {
+        Write-Output "$key : $($frequencyResult[$key])"
+    }
+}
+catch {
+    Write-Error "Unexpected error occurred."
 }
