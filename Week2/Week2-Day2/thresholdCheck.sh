@@ -1,7 +1,3 @@
-#! /bin/bash
-
-maxThreshold=80
-
 usage=$(df / | grep / | awk '{print $5}' | sed 's/%//')
 
 if [ "$usage" -gt "$maxThreshold" ]; then
