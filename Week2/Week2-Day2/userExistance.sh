@@ -1,9 +1,13 @@
 #! /bin/bash
 
-read -p "Enter user name: " userName
+checkUser() {
+    userName="$1"
 
-if id "$userName" ; then
-    echo "User exist"
-else
-    echo "User doesn't exist"
-fi 
+    if id "$userName" ; then
+        echo "User exist"
+    else
+        echo "User doesn't exist"
+    fi 
+}
+
+checkUser "$1"
