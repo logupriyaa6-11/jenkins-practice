@@ -33,12 +33,5 @@ we can choose any one of them from here
 
 This page is a preview page which shows the details which we have entered previously
 
-4. retrive password 
-![retrive password]<Week3\AWS-Assignment-Day1\retrivePassword.png>
-
-Here, the console sig-in URL, user name and console password will be listed
-and the user is created successfully
-
 ## Step 3
 Enabling MFA 
-
