@@ -69,7 +69,7 @@ Attach the role
 
 ## Step 6:
 Connect to EC2
-ssh -i your-key.pem ec2-user@13.232.124.16
+ssh -i w4-key.pem ec2-user@13.232.124.16
 Once inside, update packages:
 sudo yum update -y
 
