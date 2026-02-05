@@ -43,7 +43,8 @@ import urllib.parse
 
 s3 = boto3.client('s3')
 
-DESTINATION_BUCKET = "destination-bucket-image-copy-123-devops"
+#created env variable and used that in the code usning o.environ
+DESTINATION_BUCKET = os.environ['destination_bucket'] 
 
 def lambda_handler(event, context):
     source_bucket = event['Records'][0]['s3']['bucket']['name']
