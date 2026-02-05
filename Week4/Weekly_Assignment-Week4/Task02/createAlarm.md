@@ -27,6 +27,8 @@ Notification
 Select or create an SNS topic
 Add email
 
+![Email confirmation]<Week4\Weekly_Assignment-Week4\Task02\emailConfirmation.png>
+
 Name & Create
 EC2-High-CPU-Alarm
 
