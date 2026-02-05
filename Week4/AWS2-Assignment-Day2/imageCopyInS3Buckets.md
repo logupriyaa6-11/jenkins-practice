@@ -12,7 +12,8 @@ Trusted entity: AWS service
 Use case: Lambda
 
 Attach the policies:
-AmazonS3FullAccess
+s3:PutObject(writing)
+s3:GetObject(reading)
 CloudWatchLogsFullAccess
 
 Role name: lambda-s3-copy-role
