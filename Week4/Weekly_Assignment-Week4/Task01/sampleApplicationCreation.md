@@ -76,16 +76,30 @@ sudo yum update -y
 ![connected ec2]<Week4\Weekly_Assignment-Week4\Task01\connectingEC2 .png>
 
 ## Step 7: 
-Install Required Software on EC2
- sudo yum install httpd -y
-start the httpd
-  sudo systemctl start httpd
-enable the httpd
-  sudo systemctl enable httpd
-write some command to show on the public ec2 instance ip
- echo "Connected the database with ec2" | sudo tee /var/www/html/index.html
+Install Required Packages on EC2
+  sudo yum update -y
+  sudo yum install python3 git -y
+Create and Activate Python Virtual Environment
+  python3 -m venv venv
+  source venv/bin/activate
+Install Application Dependencies
+ pip install flask flask_sqlalchemy pymysql boto3 cryptography
+Application Files
+  app.py
+    Fetches database credentials from AWS Secrets Manager
+    Connects to RDS MySQL using SQLAlchemy
+    Defines the database model
+    Serves data through a Flask route
+  init_db.py
+    Creates database tables
+    Inserts initial sample data into RDS
+Initialize Database and Insert Data
+  python init_db.py
+Start the Flask Application
+  Run the Flask application on port 80 using the virtual environment Python interpreter:
+  sudo /home/ec2-user/venv/bin/python app.py
 
+DB Structure:
+![flaskapp DB]<Week4\Weekly_Assignment-Week4\Task01\flaskappDB.png>
 output:
-Connected the database with ec2
-
-![connection successfull]<Week4\Weekly_Assignment-Week4\Task01\sampleApplicationCreation.md>
+![connection successfull]<Week4\Weekly_Assignment-Week4\Task01\dbConnectionOutput.png>
