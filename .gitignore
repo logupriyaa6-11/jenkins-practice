@@ -48,3 +48,25 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Terraform working directory
+**/.terraform/*
+
+# Terraform state files
+**/terraform.tfstate
+**/terraform.tfstate.*
+**/*.tfstate
+**/*.tfstate.*
+
+# Terraform lock file
+**/.terraform.lock.hcl
+
+# Variable files (may contain secrets)
+*.tfvars
+*.tfvars.json
+
+# Terraform crash logs
+crash.log
+
+# OS files
+.DS_Store
+Thumbs.db
