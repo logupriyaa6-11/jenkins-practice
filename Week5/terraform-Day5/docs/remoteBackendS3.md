@@ -35,3 +35,17 @@ During Terraform operations
 4. It updates infrastructure accordingly
 5. It writes the updated state back to S3
 6. The remote backend ensures that state remains consistent and accessible across environments
+
+## how the terraform connects to AWS S3 bucket
+1. Terraform reads the backend configuration in backend.tf
+2. It checks for AWS credentials on the system
+3. It finds credentials from one of the following:
+    AWS CLI configuration (aws configure)
+    Environment variables
+
+4. Using these credentials, Terraform authenticates to AWS
+5. It connects to the specified S3 bucket
+6. It checks whether the state file exists at the defined key path
+7. If the state file exists, it reads it
+8. If not, it creates a new state file in the S3 bucket
+9. All future updates are written directly to S3
