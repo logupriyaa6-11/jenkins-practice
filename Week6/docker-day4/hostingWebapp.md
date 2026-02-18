@@ -10,7 +10,7 @@ The three containers in this project are:
     Client (Browser) -> Nginx (Port 80) -> Flask app (Port 5000) -> MySQL Database (Port 3306)
 
 - User access the application via local host (http://localhost)
-![verified with local host](verifyRunningInLocalHost.png)
+    ![verified with the local host](verifiyingWithLocalHost.png)
 - The request from the host will be received by the Nginx container 
 - The Nginx forwards the request to flask application container 
 - The flask application processes the request 
