@@ -97,3 +97,13 @@ crash.log
 # OS files
 .DS_Store
 Thumbs.db
+
+# docker
+bin/
+obj/
+Properties
+appsettings.Development.json
+appsettings.json
+MyApp.http
+.env
+awscliv2.zip
