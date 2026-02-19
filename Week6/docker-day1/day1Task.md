@@ -12,9 +12,9 @@ docker run -it ubuntu:22.04
 -i (container can receive input from the keyboard)
 -t (allocates a pseudo terminal, formats the output)
 
-- conatiner starte 
+- container started
 - bash shell opened 
-- on typinf "exit" container stopped
+- on typing "exit" stops the container
 
 ## Naming a container
 docker run -dit --name my_ubuntu ubuntu:22.04 bash 
@@ -25,12 +25,15 @@ docker run -dit --name my_ubuntu ubuntu:22.04 bash
 
 ## Checking container status 
 docker ps - shows running containers
-docker ps -a - shaows all containers incl stopped containers
+docker ps -a - shows all containers incl stopped containers
 
 ## Executing commands in running containers 
-docker exec -it my_ubuntu
+docker exec -it my_ubuntu bash
 
-- docker exec works only if the container is running
+- Opens a new bash shell inside the running container  
+- docker exec works only if the container is running  
+- Typing "exit" closes only this shell  
+- The container continues running in the background  
 
 ## Inspecting container 
 docker inspect my_ubuntu
@@ -57,6 +60,6 @@ docker rm my_ubuntu
 - Avoids leaving unused containers (consumes disk, confuses monitoring, causes resource waste)
 
 ## clean up commands 
-docker container prune - removes all stooped containers
+docker container prune - removes all stopped containers
 docker system prune - removes containers, networks, images and cache
 docker image prune - removes unused images i.e., image not used by any containers

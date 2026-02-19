@@ -3,21 +3,19 @@ version: "3"
 services:
   db:
     image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: appdb
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/mysql
 
   app:
-    build: ./app
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
     depends_on:
       - db
-    environment:
-      DB_HOST: db
-      DB_USER: root
-      DB_PASSWORD: root
-      DB_NAME: appdb
+    env_file:
+      - .env
 
   nginx:
     image: nginx:latest
