@@ -1,0 +1,10 @@
+apiversion: v1
+kind: Pod
+metadata: 
+  name: ubuntu-pod 
+  namespace: devops-namespace
+spec: 
+  containers: 
+  - name: ubuntu
+    image: ubuntu
+    command: ["sleep", "3600"]
