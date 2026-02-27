@@ -97,3 +97,12 @@ crash.log
 # OS files
 .DS_Store
 Thumbs.db
+
+bin/
+obj/
+Properties/
+appsettings.Development.json
+appsettings.json
+DotnetApp.csproj
+DotnetApp.http
+Program.cs
