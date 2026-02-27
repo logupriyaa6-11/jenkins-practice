@@ -106,3 +106,13 @@ appsettings.json
 DotnetApp.csproj
 DotnetApp.http
 Program.cs
+
+# docker
+bin/
+obj/
+Properties
+appsettings.Development.json
+appsettings.json
+MyApp.http
+.env
+awscliv2.zip
