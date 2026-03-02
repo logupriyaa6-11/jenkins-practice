@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Deploy') {
             steps {
-                sh 'ls /var/www'
+                sh 'cp -r * /var/www/html/'
             }
         }
     }
