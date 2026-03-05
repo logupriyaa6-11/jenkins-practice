@@ -1,0 +1,17 @@
+name: Simple Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Test Runner
+        run: echo "Self-hosted runner is working!"
