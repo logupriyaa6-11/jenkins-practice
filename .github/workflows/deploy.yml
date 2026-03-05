@@ -16,11 +16,8 @@ jobs:
       - name: Test Runner
         run: echo "Self-hosted runner is working!"
 
-  deploy-production:
-    needs: test
-    runs-on: self-hosted
-    environment: production
-
-    steps:
-      - name: Production Deploy Step
-        run: echo "Deploying to production..."
+      - name: Send Slack Notification
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"GitHub Actions build completed!"}' \
+          ${{ secrets.SLACK_WEBHOOK }}
