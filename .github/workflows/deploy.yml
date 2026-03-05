@@ -15,3 +15,12 @@ jobs:
 
       - name: Test Runner
         run: echo "Self-hosted runner is working!"
+
+  deploy-production:
+    needs: test
+    runs-on: self-hosted
+    environment: production
+
+    steps:
+      - name: Production Deploy Step
+        run: echo "Deploying to production..."
